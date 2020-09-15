@@ -1,0 +1,55 @@
+Skip to content
+do-community
+/
+minify-tool
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+minify-tool/src/minify-tool/data/terser/base.js
+@MattIPv4
+MattIPv4 Cleanup
+ 1 contributor
+32 lines (24 sloc)  1.06 KB
+ 
+/*
+Copyright 2020 DigitalOcean
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+export default `// Import Terser so we can use it
+const Terser = require('terser');
+// Import fs so we can read/write files
+const fs = require('fs');
+// Define the config for how Terser should minify the code
+// This is set to how you currently have this web tool configured
+const config = {{CONFIG}};
+// Load in your code to minify
+const code = fs.readFileSync('my_code.js', 'utf8');
+// Minify the code with Terser, raising any errors
+const minified = Terser.minify(code, config);
+if (minified.error) throw minified.error;`;
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
