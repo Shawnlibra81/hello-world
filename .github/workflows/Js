@@ -1,0 +1,70 @@
+ 
+{
+  "name": "minify-tool",
+  "version": "1.0.0",
+  "description": "A web tool for the DigitalOcean Community to quickly minify JavaScript files.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "npm run build:clean && npm run build:template && npm run build:static && npm run build:tool",
+    "build:clean": "do-vue clean",
+    "build:template": "do-vue template",
+    "build:static": "copyfiles --up 2 ./src/static/{*,**/*} dist",
+    "build:tool": "do-vue tool src/minify-tool dist --scope-hoisting",
+    "dev": "npm run dev:prep && parcel ./src/minify-tool/index.html --out-dir ./dev --port 8000 --no-source-maps",
+    "deploy:spaces:comment": "do-vue comment minify-tool",
+    "dev:prep": "npm run build:template && npm run dev:static",
+    "dev:static": "copyfiles --up 2 ./src/static/{*,**/*} dev",
+    "test": "npm run test:eslint && npm run test:scss",
+    "test:fix": "npm run test:eslint:fix && npm run test:scss:fix",
+    "test:eslint": "eslint 'src/**/*.{js,vue}'",
+    "test:eslint:fix": "npm run test:eslint -- --fix",
+    "test:scss": "sass-lint ./src/**/*.scss --verbose --no-exit --config .sasslintrc",
+    "test:scss:fix": "sass-lint-auto-fix './src/**/*.scss'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/do-community/minify-tool.git"
+  },
+  "keywords": [
+    "minfiy",
+    "javascript",
+    "terser"
+  ],
+  "author": "DigitalOcean",
+  "bugs": {
+    "url": "https://github.com/do-community/minify-tool/issues"
+  },
+  "homepage": "https://github.com/do-community/minify-tool#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.11.2",
+    "babel-polyfill": "^6.26.0",
+    "clone": "^2.1.2",
+    "do-bulma": "git+https://github.com/do-community/do-bulma.git",
+    "do-vue": "git+https://github.com/do-community/do-vue.git",
+    "parcel-bundler": "^1.12.4",
+    "pretty-bytes": "^5.4.1",
+    "pretty-checkbox-vue": "^1.1.9",
+    "prismjs": "^1.21.0",
+    "stringify-object": "^3.3.0",
+    "terser": "^4.8.0",
+    "utf8-byte-length": "^1.0.4",
+    "vue": "^2.6.12",
+    "vue-hot-reload-api": "^2.3.3",
+    "vue-prism-editor": "^1.2.2",
+    "vue-select": "^3.10.8",
+    "vue-tippy": "^4.7.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@vue/component-compiler-utils": "^3.2.0",
+    "copyfiles": "^2.3.0",
+    "eslint": "^7.8.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "posthtml": "^0.13.3",
+    "posthtml-extend": "^0.5.0",
+    "sass": "^1.26.10",
+    "sass-lint": "^1.13.1",
+    "sass-lint-auto-fix": "^0.21.2",
+    "vue-template-compiler": "^2.6.12"
+  }
+}
